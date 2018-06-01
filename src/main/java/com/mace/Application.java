@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.solr.SolrAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -19,6 +20,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication(exclude = {SolrAutoConfiguration.class})//不自动装配solr
 @EnableScheduling//启动定时任务
+@EnableKafka//启用对Kafka的支持
 public class Application {
 
     public static void main(String[] args) {

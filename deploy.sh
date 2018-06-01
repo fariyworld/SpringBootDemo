@@ -1,8 +1,8 @@
 #项目自动化发布脚本
 echo "===========进入git项目SpringBootDemo目录============="
 cd /data/developer/git-repository/SpringBootDemo
-echo "==========git切换分之到master==============="
-git checkout master
+echo "==========git切换分之到branch1==============="
+git checkout branch1
 echo "==================git fetch(update)======================"
 git fetch
 echo "==================git pull(拉取)======================"
