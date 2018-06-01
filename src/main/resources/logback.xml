@@ -16,8 +16,8 @@
 			stdout将日志信息输出到控制上，为方便开发测试使用
 	-->
     <contextName>SpringBootDemo</contextName>
-    <property name="LOG_PATH" value="D:\\WebLogs\\SpringBootDemoLogbacks"/>
-    <!--<property name="LOG_PATH" value="logs"></property>-->
+    <!--<property name="LOG_PATH" value="D:\\WebLogs\\SpringBootDemoLogbacks"/>-->
+    <property name="LOG_PATH" value="logs"></property>
     <!-- 日志记录器，FILE_ERROR -->
     <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文件的路径及文件名 -->
