@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Exception页面</title>
+</head>
+<body>
+    <h1 th:inline="text">统一异常页面处理</h1>
+    <span>IP地址:&nbsp;&nbsp;</span><span th:text="${exceptionInfo.ip}"></span><br />
+    <span>URL:&nbsp;&nbsp;</span><span th:text="${exceptionInfo.url}"></span><br />
+    <span>CLASS_METHOD:&nbsp;&nbsp;</span><span th:text="${exceptionInfo.class_method}"></span><br />
+    <span>EX_MESSAGE:&nbsp;&nbsp;</span><span th:text="${exceptionInfo.ex_message}"></span><br />
+    <span>EXCEPTION:&nbsp;&nbsp;</span><span th:text="${exceptionInfo.exception}"></span><br />
+    <span>堆栈信息:&nbsp;&nbsp;</span><span th:text="${exceptionInfo.stackTrace}"></span>
+</body>
+</html>

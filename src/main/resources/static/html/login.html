@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+    <h2>用户登录</h2>
+    <form action="" method="post">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td>手机号/账号：</td>
+                <td><input type="text" id="username" /></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" id="password" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="button" id="loginbtn" value="登录" /></td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>（单文件上传）上传文件至FTP服务器</h2>
+    <form action="" method="post" enctype="multipart/form-data" id="upload">
+        <input type="file" id="photo" name="photo" />
+        <input type="button" id="hpbtn" value="上传" />
+    </form>
+
+
+    <h2>（多文件上传）上传文件至FTP服务器</h2>
+    <form action="" method="post" enctype="multipart/form-data" id="mul_upload">
+        <input type="file" id="multi_file" name="multi_file" multiple="multiple" />
+        <!--<input type="file" id="file2" name="file2" />-->
+        <input type="button" id="mul_hpbtn" value="上传" />
+    </form>
+
+
+<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        //登录
+        $("#loginbtn").click(function(){
+
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var data = {"username":username,"password":password};
+            var url = "/testAjax.do";
+            $.post(url,data,function(data){
+                if(data.status === 0){
+                    alert("登录成功");
+                }else{
+                    //登录成功，到主页面
+                    // window.location.href = '';
+                    alert("登录失败");
+                }
+            },"json");
+
+        });
+
+        //单文件上传
+        $("#hpbtn").click(function(){
+            //上传文件
+            $.ajaxFileUpload({
+
+                //用于文件上传的服务器端请求地址
+                url: '/ftp/uploadFile.do',
+                //是否启用安全提交,一般设置为false
+                secureuri: false,
+                //文件上传空间的id属性  <input type="file" id="photo" name="photo" />
+                fileElementId: 'photo',
+                //返回值类型 一般设置为json
+                dataType: 'json',
+                //异步
+                async: true,
+                //服务器成功响应处理函数
+                success:function (data) {
+                    if(data.status === 0){
+                        //上传成功
+                        // window.location.href = data.data.url;
+                        consolr.log(data.data);
+                    }else{
+                        //上传失败
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+
+        //多文件上传（后台限制个数）
+        $("#mul_hpbtn").click(function(){
+
+            var name = $("#mul_file").attr("name");
+
+            //上传文件
+            $.ajaxFileUpload({
+
+                //用于文件上传的服务器端请求地址
+                url: '/ftp/uploadMultiFile.do',
+                //是否启用安全提交,一般设置为false
+                secureuri: false,
+                //文件上传空间的id属性  <input type="file" id="mul_file" name="mul_file" multiple="multiple"/>
+                fileElementId: 'multi_file',
+                //返回值类型 一般设置为json
+                dataType: 'json',
+                //异步
+                async: true,
+                //参数
+                data:{"name":name},
+                //服务器成功响应处理函数
+                success:function (data) {
+                    if(data.status === 0){
+                        //上传成功
+                        // window.location.href = data.data.url;
+                        console.log(data.data);
+                    }else{
+                        //上传失败
+                        alert(data.msg);
+                    }
+                }
+            });
+
+        });
+
+    });
+</script>
+</body>
+</html>

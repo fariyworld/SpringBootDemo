@@ -1,0 +1,282 @@
+#tomcat 配置
+server:
+  port: 8088
+  tomcat:
+    uri-encoding: UTF-8
+
+#加密参数
+jasypt:
+  encryptor:
+    password: aqeaqeaeqaeqraq
+
+#MD5加密盐值
+md5:
+  salt: aqeaqeaeqaeqraq
+
+#FTP文件服务器设置
+ftp:
+  host: 192.168.88.132
+  username: ftpuser
+  password: ENC(Qml0BS/5j8LD9dyKa+Eo/Y4DhmGofWLQ)
+  prefix: ftp://192.168.88.132/
+  remotePath: /data/ftpfile/
+#  FTPclient缓冲区
+  buffer-size: 1024
+
+#springboot定时任务多线程配置
+schedule:
+  pool:
+    #线程数
+    core-pool-size: 2
+    #线程名前缀
+    thread-name-prefix: schedule-task-
+    #线程池最大线程数
+    max-pool-size: 8
+    #队列容量
+    queue-capacity: 8
+
+spring:
+#  统一编码UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+#  统一编码UTF-8
+  messages:
+    encoding: UTF-8
+
+#  热部署生效
+  devtools:
+    restart:
+      enabled: true
+
+  servlet:
+#    文件上传
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+#      启用是为了推迟文件解析,以便捕获文件大小异常
+      resolve-lazily: true
+
+#  Thymeleaf模板
+  thymeleaf:
+#    关闭缓存
+    cache: false
+#  freemarker模板
+  freemarker:
+#    关闭缓存
+    cache: false
+
+#  redis 数据源配置
+  redis:
+#    Redis服务器地址
+    host: 192.168.88.132
+#    Redis数据库索引（默认为0）
+    database: 0
+#    Redis服务器连接端口
+    port: 6379
+#    Redis服务器连接密码（默认为空）
+    password: ENC(Qml0BS/5j8LD9dyKa+Eo/Y4DhmGofWLQ)
+#    Redis连接超时时间（1分钟）
+    timeout: 1m
+    jedis:
+      pool:
+#        连接池最大连接数（使用负值表示没有限制）
+        max-active: 3
+#        连接池中的最大空闲连接
+        max-idle: 1
+#        连接池中的最小空闲连接
+        min-idle: 1
+#        连接池最大阻塞等待时间（使用负值表示没有限制）（1分钟）
+        max-wait: 1m
+
+#  redis实现spring session共享
+  session:
+    store-type: redis
+    redis:
+      namespace: springbootdemo-session-redis
+
+#  RabbitMQ消息队列
+  rabbitmq:
+    host: 192.168.88.132
+    port: 5672
+    username: mace
+    password: ENC(Qml0BS/5j8LD9dyKa+Eo/Y4DhmGofWLQ)
+    connection-timeout: 1m
+    virtual-host: /rabbitmq_host1
+#    消息的回调
+    publisher-confirms: true
+
+#  kafka配置
+  kafka:
+#    ============== kafka ===================
+#    指定kafka 代理地址，可以多个，用逗号分隔
+    bootstrap-servers: 192.168.88.132:9092
+    client-id: 0
+#    =============== producer  =======================
+    producer:
+#      在Producer端用来存放尚未发送出去的Message的缓冲区大小。缓冲区满了之后可以选择阻塞发送或抛出异常，
+#      由block.on.buffer.full的配置来决定。
+#      每次批量发送消息的数量 32MB
+      buffer-memory: 524288
+#      Producer会尝试去把发往同一个Partition的多个Requests进行合并，
+#      batch.size指明了一次Batch合并后Requests总大小的上限。如果这个值设置的太小，可能会导致所有的Request都不进行Batch
+#      16KB
+      batch-size: 65536
+#      指定消息key和消息体的编解码方式  org.springframework.kafka.support.serializer.JsonSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      bootstrap-servers: 192.168.88.132:9092
+      client-id: 0
+#    =============== consumer  =======================
+    consumer:
+      group-id: springbootGroup
+#      如果为真，consumer所fetch的消息的offset将会自动的同步到zookeeper。
+#      这项提交的offset将在进程挂掉时，由新的consumer使用
+#      enable-auto-commit: true
+#      auto-commit-interval: 100
+#      earliest:当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费
+#      latest:当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据
+#      none:topic各分区都存在已提交的offset时，从offset后开始消费；只要有一个分区不存在已提交的offset，则抛出异常
+      auto-offset-reset: earliest
+#      指定消息key和消息体的编解码方式  org.springframework.kafka.support.serializer.JsonDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      bootstrap-servers: 192.168.88.132:9092
+      client-id: 0
+#    =============== template  =======================
+    template:
+      default-topic: test
+
+
+#  数据源配置
+  data:
+    #mongodb数据源配置
+    mongodb:
+      host: 192.168.88.132
+      port: 27017
+#      认证数据库
+      authentication-database: admin
+      username: mace
+      password: ENC(Qml0BS/5j8LD9dyKa+Eo/Y4DhmGofWLQ)
+#      用户使用数据库
+      database: testDB
+      repositories:
+        type: auto
+
+#    redis数据源配置
+    redis:
+      repositories:
+        enabled: true
+
+#    solr数据源配置
+    solr:
+#      solr服务url
+      host: http://192.168.88.132:8983/solr
+#      安全认证用户名
+      username: mace
+#      密码
+      password: ENC(Qml0BS/5j8LD9dyKa+Eo/Y4DhmGofWLQ)
+#      最大连接数
+      maxConnections: 8
+#      每个主机最大连接数
+      maxConnectionsPerHost: 2
+#      遵循重定向
+      followRedirects: false
+      repositories:
+        enabled: true
+  #数据源配置
+  datasource:
+#    数据库连接池 druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    #master-mysql数据源配置
+    master:
+      url: jdbc:mysql://192.168.88.132:3306/mmall?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false
+      username: root
+      password: ENC(Qml0BS/5j8LD9dyKa+Eo/Y4DhmGofWLQ)
+      driver-class-name: com.mysql.jdbc.Driver
+      masterMapperLocations: classpath:mapper_mysql/*Mapper.xml
+
+    #cluster-oracle数据源配置
+    cluster:
+      url: jdbc:oracle:thin:@192.168.88.132:1521:XE
+      username: mace
+      password: ENC(Qml0BS/5j8LD9dyKa+Eo/Y4DhmGofWLQ)
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      clusterMapperLocations: classpath:mapper_oracle/*Mapper.xml
+    #mysql+druid数据库连接池
+    druid:
+      #name: 如果存在多数据源，监控的时候区分 如果不设置 默认DataSource-" + System.identityHashCode(this)
+#      name: DataSource-SpringBootDemo
+#      url: jdbc:mysql://192.168.88.129:3306/*?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false
+#      username: root
+#      password: ENC(356IXRJuIUZGToRMUG375+pm5hnmyqM4)
+#      driver-class-name: com.mysql.jdbc.Driver
+#      db-type: mysql
+      #druid连接池配置
+      async-init: true
+      async-close-connection-enable: true
+      #初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
+      initial-size: 1
+      #最小连接池数量
+      min-idle: 1
+      #最大连接池数量
+      max-active: 3
+      #获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁。
+      max-wait: 60000
+      #是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 100
+      #建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #mysql检查数据库连接 oracle select 1 from dual
+      validation-query: select 1
+      #stat 监控 wall sql注入
+      filters: stat,wall
+      filter:
+        stat:
+          merge-sql: true
+          slow-sql-millis: 5000
+
+
+
+
+
+#mybatis配置
+mybatis:
+  configuration:
+    #记录到日志
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    #控制台输出sql
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #开启驼峰转换
+    map-underscore-to-camel-case: true
+    #使全局的映射器启用或禁用缓存
+    cache-enabled: true
+    #全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载
+    lazy-loading-enabled: true
+    #当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载
+    aggressive-lazy-loading: true
+    #允许JDBC 生成主键。需要驱动器支持
+    use-generated-keys: true
+    #指定 MyBatis 如何自动映射 数据基表的列 NONE：不隐射　PARTIAL:部分  FULL:全部
+    auto-mapping-behavior: partial
+    #这是默认的执行类型（SIMPLE: 简单； REUSE: 执行器可能重复使用prepared statements语句；BATCH: 执行器可以重复执行语句和批量更新)
+    default-executor-type: simple
+  #mybatis 别名
+  type-aliases-package: com.mace
+  #mapper xml 扫描
+  mapper-locations: mapper*/*Mapper.xml
+
+
+#pagehepler分页
+pagehelper:
+  reasonable: "true"
+  support-methods-arguments: "true"
+  params: count=countSql
+  auto-runtime-dialect: "true"

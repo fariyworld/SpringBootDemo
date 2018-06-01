@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mace.mapper_mysql.ShippingMapper" >
+  <resultMap id="BaseResultMap" type="com.mace.domain.Shipping" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="receiver_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_mobile" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_province" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_city" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_district" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="receiver_zip" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, receiver_name, receiver_phone, receiver_mobile, receiver_province, receiver_city, 
+    receiver_district, receiver_address, receiver_zip, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mmall_shipping
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from mmall_shipping
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mace.domain.Shipping" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into mmall_shipping (user_id, receiver_name, receiver_phone, 
+      receiver_mobile, receiver_province, receiver_city, 
+      receiver_district, receiver_address, receiver_zip, 
+      create_time, update_time)
+    values (#{user_id,jdbcType=INTEGER}, #{receiver_name,jdbcType=VARCHAR}, #{receiver_phone,jdbcType=VARCHAR}, 
+      #{receiver_mobile,jdbcType=VARCHAR}, #{receiver_province,jdbcType=VARCHAR}, #{receiver_city,jdbcType=VARCHAR}, 
+      #{receiver_district,jdbcType=VARCHAR}, #{receiver_address,jdbcType=VARCHAR}, #{receiver_zip,jdbcType=VARCHAR}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mace.domain.Shipping" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into mmall_shipping
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="user_id != null" >
+        user_id,
+      </if>
+      <if test="receiver_name != null" >
+        receiver_name,
+      </if>
+      <if test="receiver_phone != null" >
+        receiver_phone,
+      </if>
+      <if test="receiver_mobile != null" >
+        receiver_mobile,
+      </if>
+      <if test="receiver_province != null" >
+        receiver_province,
+      </if>
+      <if test="receiver_city != null" >
+        receiver_city,
+      </if>
+      <if test="receiver_district != null" >
+        receiver_district,
+      </if>
+      <if test="receiver_address != null" >
+        receiver_address,
+      </if>
+      <if test="receiver_zip != null" >
+        receiver_zip,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="user_id != null" >
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="receiver_name != null" >
+        #{receiver_name,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_phone != null" >
+        #{receiver_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_mobile != null" >
+        #{receiver_mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_province != null" >
+        #{receiver_province,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_city != null" >
+        #{receiver_city,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_district != null" >
+        #{receiver_district,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_address != null" >
+        #{receiver_address,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_zip != null" >
+        #{receiver_zip,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mace.domain.Shipping" >
+    update mmall_shipping
+    <set >
+      <if test="user_id != null" >
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="receiver_name != null" >
+        receiver_name = #{receiver_name,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_phone != null" >
+        receiver_phone = #{receiver_phone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_mobile != null" >
+        receiver_mobile = #{receiver_mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_province != null" >
+        receiver_province = #{receiver_province,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_city != null" >
+        receiver_city = #{receiver_city,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_district != null" >
+        receiver_district = #{receiver_district,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_address != null" >
+        receiver_address = #{receiver_address,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver_zip != null" >
+        receiver_zip = #{receiver_zip,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mace.domain.Shipping" >
+    update mmall_shipping
+    set user_id = #{user_id,jdbcType=INTEGER},
+      receiver_name = #{receiver_name,jdbcType=VARCHAR},
+      receiver_phone = #{receiver_phone,jdbcType=VARCHAR},
+      receiver_mobile = #{receiver_mobile,jdbcType=VARCHAR},
+      receiver_province = #{receiver_province,jdbcType=VARCHAR},
+      receiver_city = #{receiver_city,jdbcType=VARCHAR},
+      receiver_district = #{receiver_district,jdbcType=VARCHAR},
+      receiver_address = #{receiver_address,jdbcType=VARCHAR},
+      receiver_zip = #{receiver_zip,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
