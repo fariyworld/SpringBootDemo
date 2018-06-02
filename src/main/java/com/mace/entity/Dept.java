@@ -6,6 +6,12 @@ import java.io.Serializable;
 
 public class Dept implements Serializable {
 
+
+    /**
+     * 主键，自增长
+     */
+    private Integer id;
+
     /**
      * 部门ID
      */
@@ -32,8 +38,9 @@ public class Dept implements Serializable {
         this.loc = loc;
     }
 
-    public Dept() {
-    }
+    public Dept() { }
+
+    public Integer getId() { return id; }
 
     public Integer getEptno() {
         return eptno;
@@ -62,7 +69,8 @@ public class Dept implements Serializable {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Dept{");
-        sb.append("eptno=").append(eptno);
+        sb.append("id=").append(id);
+        sb.append(", eptno=").append(eptno);
         sb.append(", dname='").append(dname).append('\'');
         sb.append(", loc='").append(loc).append('\'');
         sb.append('}');

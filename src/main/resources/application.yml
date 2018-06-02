@@ -126,6 +126,13 @@ spring:
 #      batch.size指明了一次Batch合并后Requests总大小的上限。如果这个值设置的太小，可能会导致所有的Request都不进行Batch
 #      16KB
       batch-size: 65536
+#      接收消息的时间 默认为0
+#      0：producer不会等待broker发送ack
+#      1：当leader接收到消息之后发送ack
+#      2：当所有的follower都同步消息成功后发送ack
+      acks: 1
+#      消息压缩算法 none,gzip,snappy
+      compression-type: none
 #      指定消息key和消息体的编解码方式  org.springframework.kafka.support.serializer.JsonSerializer
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -136,17 +143,21 @@ spring:
       group-id: springbootGroup
 #      如果为真，consumer所fetch的消息的offset将会自动的同步到zookeeper。
 #      这项提交的offset将在进程挂掉时，由新的consumer使用
-#      enable-auto-commit: true
-#      auto-commit-interval: 100
+      enable-auto-commit: false
+#      自动提交的时间间隔，默认1分钟
+      auto-commit-interval: 1m
 #      earliest:当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费
 #      latest:当各分区下有已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据
 #      none:topic各分区都存在已提交的offset时，从offset后开始消费；只要有一个分区不存在已提交的offset，则抛出异常
       auto-offset-reset: earliest
+      #最大拉取记录数
+      max-poll-records: 100
 #      指定消息key和消息体的编解码方式  org.springframework.kafka.support.serializer.JsonDeserializer
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       bootstrap-servers: 192.168.88.132:9092
       client-id: 0
+
 #    =============== template  =======================
     template:
       default-topic: test
