@@ -10,14 +10,14 @@
     </constructor>
   </resultMap>
   <insert id="insert" parameterType="com.mace.entity.Dept" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       select seq_mace_dept_id.CURRVAL from dual
     </selectKey>
     insert into DEPT (eptno,dname,loc)
     values (#{eptno,jdbcType=DECIMAL},#{dname,jdbcType=VARCHAR}, #{loc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mace.entity.Dept" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       select seq_mace_dept_id.CURRVAL from dual
     </selectKey>
     insert into DEPT
