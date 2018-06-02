@@ -131,9 +131,9 @@
         <encoder>
             <!-- %d日期,%p日志级别,%file文件名,%line所在行数,%m输出的信息,%n换行 -->
             <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%c] [%thread] %-5level %logger{50} - %msg %n</pattern>-->
-            <!--<pattern>%black(控制台-) %red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger{10}) - %cyan(%msg%n)</pattern>-->
+            <pattern>%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger) - %cyan(%msg%n)</pattern>
             <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}  %highlight(%-5level) -&#45;&#45; [%thread]  %boldMagenta(%logger{50})  :  %msg%n</pattern>-->
-            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <!--<pattern>${CONSOLE_LOG_PATTERN}</pattern>-->
             <!--字符编码-->
             <charset>UTF-8</charset><!--此处设置字符集-->
         </encoder>
