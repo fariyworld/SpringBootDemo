@@ -40,6 +40,8 @@ public class Dept implements Serializable {
 
     public Dept() { }
 
+    public void setId(Integer id) { this.id = id; }
+
     public Integer getId() { return id; }
 
     public Integer getEptno() {
