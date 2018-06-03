@@ -18,7 +18,7 @@ public class FanoutController {
     @Autowired
     private FanoutSender fanoutSender;
 
-    @RequestMapping(value = "/testRabbitMQFanout.do")
+    @RequestMapping(value = "testRabbitMQFanout.do")
     public ResponseMessage testRabbitMQFanout(){
 
         fanoutSender.send();
