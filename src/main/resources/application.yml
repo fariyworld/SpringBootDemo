@@ -106,7 +106,7 @@ spring:
     username: mace
     password: ENC(Qml0BS/5j8LD9dyKa+Eo/Y4DhmGofWLQ)
     connection-timeout: 1m
-    virtual-host: /rabbitmq_host1
+    virtual-host: /rabbitmq_host001
 #    消息的回调
     publisher-confirms: true
 
