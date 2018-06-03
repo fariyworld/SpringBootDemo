@@ -20,7 +20,7 @@ public class SolrServiceImpl<T> implements ISolrService<T> {
     private SolrTemplate solrTemplate;
 
 
-    public T getById(Integer id, String collectionName, Class<T> clazz){
+    public T getById(String id, String collectionName, Class<T> clazz){
 
         return solrTemplate.getById(collectionName, id, clazz).get();
     }
