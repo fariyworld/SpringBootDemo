@@ -61,7 +61,7 @@ public class SolrConfig {
         log.info("maxConnectionsPerHost: {}",maxConnectionsPerHost);
         log.info("followRedirects: {}",followRedirects);
         log.info("username: {}",username);
-        log.info("password: {}",password);
+        log.info("password: {}","<>");
         log.info("host: {}",host);
 
         ModifiableSolrParams params = new ModifiableSolrParams();
