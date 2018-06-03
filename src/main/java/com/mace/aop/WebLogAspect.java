@@ -57,9 +57,19 @@ public class WebLogAspect {
             }
             log.info("request参数===========================================end");
         }else{
-            if(joinPoint.getArgs().length != 1){
+
+            System.out.println(Arrays.toString(joinPoint.getArgs()).equals("[]"));
+            System.out.println(Arrays.toString(joinPoint.getArgs()).equals("[{}]"));
+
+            if(!Arrays.toString(joinPoint.getArgs()).equals("[]")){
                 log.info("URL_PATH参数: "+ Arrays.toString(joinPoint.getArgs()));
             }
+
+            if(!Arrays.toString(joinPoint.getArgs()).equals("[{}]")){
+                log.info("URL_PATH参数: "+ Arrays.toString(joinPoint.getArgs()));
+            }
+
+            log.info("URL_PATH参数: "+ Arrays.toString(joinPoint.getArgs()));
         }
 
     }

@@ -23,7 +23,7 @@ public class MongoController {
     private IUserService iUserService;
 
 
-    @RequestMapping(value = "createCollection.do/{collectionName}")
+    @RequestMapping(value = "createCollection/{collectionName}")
     public ResponseMessage<String> createCollection(@PathVariable String collectionName){
 
         if(iMongoService.createCollection(collectionName))
@@ -33,7 +33,7 @@ public class MongoController {
     }
 
 
-    @RequestMapping(value = "importData.do/{collectionName}")
+    @RequestMapping(value = "importData/{collectionName}")
     public ResponseMessage<String> importData(@PathVariable String collectionName){
 
         if(iMongoService.insert(iUserService.findAll(), collectionName))
