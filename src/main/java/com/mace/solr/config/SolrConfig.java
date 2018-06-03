@@ -33,6 +33,25 @@ public class SolrConfig {
     @Value("${spring.data.solr.followRedirects}")
     private boolean followRedirects;
 
+//    private static String username;
+//    private static String password;
+//    private static String host;
+//    private static int maxConnections;
+//    private static int maxConnectionsPerHost;
+//    private static boolean followRedirects;
+//
+//    static {
+//
+//        host = SolrProperties.host;
+//        username = SolrProperties.username;
+//        password = SolrProperties.password;
+//        maxConnections = SolrProperties.maxConnections;
+//        maxConnectionsPerHost = SolrProperties.maxConnectionsPerHost;
+//        followRedirects = SolrProperties.followRedirects;
+//    }
+
+
+
     @Bean
     @Scope(value = "singleton")
     public SolrTemplate solrTemplate(){

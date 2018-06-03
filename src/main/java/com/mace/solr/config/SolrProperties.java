@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
  * <br />
  * Created by mace on 15:18 2018/5/29.
  */
-//@Component
-//@ConfigurationProperties(prefix = "spring.data.solr")
+@Component
+@ConfigurationProperties(prefix = "spring.data.solr")
 public class SolrProperties {
 
     public static String host;
@@ -55,11 +55,9 @@ public class SolrProperties {
         return maxConnectionsPerHost;
     }
 
-    public void setMaxConnectionsPerHost(int maxConnectionsPerHost) {
-        this.maxConnectionsPerHost = maxConnectionsPerHost;
-    }
+    public void setMaxConnectionsPerHost(int maxConnectionsPerHost) { this.maxConnectionsPerHost = maxConnectionsPerHost; }
 
-    public boolean isFollowRedirects() {
+    public boolean getFollowRedirects() {
         return followRedirects;
     }
 
