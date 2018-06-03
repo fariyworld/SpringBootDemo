@@ -15,3 +15,5 @@ echo "============进入/data/developer/git-jar/SpringBootDemo目录"
 cd /data/developer/git-jar/SpringBootDemo
 echo "============后台运行Jar包============="
 (nohup java -jar SpringBootMongoDB-1.0-SNAPSHOT.jar &>consoleMsg.log &)
+echo "============监控日志================="
+tail -f consoleMsg.log

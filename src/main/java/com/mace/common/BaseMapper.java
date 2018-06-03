@@ -1,7 +1,5 @@
 package com.mace.common;
 
-import com.github.pagehelper.PageInfo;
-
 import java.util.List;
 
 /**
@@ -12,4 +10,5 @@ import java.util.List;
 public interface BaseMapper<T>{
 
     List<T> findByPage();
+
 }

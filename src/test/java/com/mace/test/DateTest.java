@@ -1,6 +1,7 @@
 package com.mace.test;
 
 import com.mace.kafka.bean.Message;
+import com.mace.util.DateUtil;
 
 import java.util.Date;
 
@@ -18,7 +19,7 @@ public class DateTest {
         msg.setTopic("test");
         msg.setKey("hello");
         msg.setData("世界");
-        msg.setSendTime(new Date());
+        msg.setSendTime(DateUtil.formatDate(new Date()));
 
         //Message{topic=test, key=hello, data=世界, sendTime=2018-06-01 15:07:36.319}
         System.out.println(msg);

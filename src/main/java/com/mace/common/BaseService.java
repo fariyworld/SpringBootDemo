@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * description:
@@ -26,4 +27,6 @@ public interface BaseService<T,PK extends Serializable> {
     int updateByPrimaryKey(T t);
 
     PageInfo<T> findByPage(int pageNum, int pageSize);
+
+    List<T> findAll();
 }

@@ -15,4 +15,5 @@ public interface DeptMapper extends BaseMapper<Dept> {
      * @mbggenerated
      */
     int insertSelective(Dept record);
+
 }

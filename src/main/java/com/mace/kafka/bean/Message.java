@@ -13,17 +13,17 @@ import java.util.Date;
 public class Message<T> {
 
     private String topic;
-    private T key;
+    private String key;
     private T data;
-    private Date sendTime;
+    private String sendTime;
 
-    public Message(String topic, T data, Date sendTime) {
+    public Message(String topic, T data, String sendTime) {
         this.topic = topic;
         this.data = data;
         this.sendTime = sendTime;
     }
 
-    public Message(String topic, T key, T data, Date sendTime) {
+    public Message(String topic, String key, T data, String sendTime) {
         this.topic = topic;
         this.key = key;
         this.data = data;
@@ -41,11 +41,11 @@ public class Message<T> {
         this.topic = topic;
     }
 
-    public T getKey() {
+    public String getKey() {
         return key;
     }
 
-    public void setKey(T key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
@@ -57,11 +57,11 @@ public class Message<T> {
         this.data = data;
     }
 
-    public Date getSendTime() {
+    public String getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(Date sendTime) {
+    public void setSendTime(String sendTime) {
         this.sendTime = sendTime;
     }
 
@@ -71,7 +71,7 @@ public class Message<T> {
         sb.append("topic=").append(topic);
         sb.append(", key=").append(key);
         sb.append(", data=").append(data);
-        sb.append(", sendTime=").append(DateUtil.formatDate(sendTime));
+        sb.append(", sendTime=").append(sendTime);
         sb.append('}');
         return sb.toString();
     }

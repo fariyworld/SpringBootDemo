@@ -1,4 +1,4 @@
-package com.mace.service_mysql.impl;
+package com.mace.service.mysql.impl;
 
 
 import com.github.pagehelper.PageHelper;
@@ -9,7 +9,7 @@ import com.mace.common.ResponseCode;
 import com.mace.common.ResponseMessage;
 import com.mace.domain.User;
 import com.mace.mapper_mysql.UserMapper;
-import com.mace.service_mysql.IUserService;
+import com.mace.service.mysql.IUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,6 +73,12 @@ public class UserServiceImpl implements IUserService {
         PageHelper.startPage(pageNum, pageSize);
         List<User> userList = userMapper.findByPage();
         return new PageInfo<User>(userList);
+    }
+
+    @Override
+    public List<User> findAll() {
+
+        return userMapper.findByPage();
     }
 
     /**

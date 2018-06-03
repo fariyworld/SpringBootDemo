@@ -2,6 +2,7 @@ package com.mace.controller.kafka;
 
 import com.mace.common.ResponseMessage;
 import com.mace.kafka.bean.Message;
+import com.mace.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -31,7 +32,7 @@ public class SampleController {
 
         log.info("将要发送的消息：{}",message);
 //        log.info("kafka default topic: {}",kafkaTemplate.getDefaultTopic());
-        message.setSendTime(new Date());
+        message.setSendTime(DateUtil.formatDate(new Date()));
         kafkaTemplate.send(message.getTopic(), message.getKey(), message.getData());
 
         return ResponseMessage.createBySuccessMessage("发送成功");

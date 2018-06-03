@@ -5,7 +5,7 @@ import com.mace.common.Constant;
 import com.mace.common.ResponseCode;
 import com.mace.common.ResponseMessage;
 import com.mace.domain.User;
-import com.mace.service_mysql.IUserService;
+import com.mace.service.mysql.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

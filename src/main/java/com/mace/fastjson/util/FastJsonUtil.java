@@ -26,7 +26,8 @@ public class FastJsonUtil {
     }
 
     private static final SerializerFeature[] features = {
-
+//        SerializerFeature.PrettyFormat,
+        SerializerFeature.WriteDateUseDateFormat,   //统一转换时间戳: yyyy-MM-dd HH:mm:ss
         SerializerFeature.WriteMapNullValue,        // 输出空置字段
         SerializerFeature.WriteNullListAsEmpty,     // list字段如果为null，输出为[]，而不是null
         SerializerFeature.WriteNullNumberAsZero,    // 数值字段如果为null，输出为0，而不是null

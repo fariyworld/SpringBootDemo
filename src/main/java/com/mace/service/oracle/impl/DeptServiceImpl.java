@@ -1,9 +1,9 @@
-package com.mace.service_oracle.impl;
+package com.mace.service.oracle.impl;
 
 import com.mace.common.ResponseMessage;
 import com.mace.entity.Dept;
 import com.mace.mapper_oracle.DeptMapper;
-import com.mace.service_oracle.IDeptService;
+import com.mace.service.oracle.IDeptService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

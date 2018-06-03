@@ -1,4 +1,4 @@
-package com.mace.service_oracle;
+package com.mace.service.oracle;
 
 import com.mace.common.ResponseMessage;
 import com.mace.entity.Dept;

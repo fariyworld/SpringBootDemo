@@ -16,25 +16,28 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- master 配置事务增强（究竟如何管理事务） -->
-    <tx:advice id="txAdvice" transaction-manager="masterTransactionManager">
+    <tx:advice id="txAdvice_mysql" transaction-manager="masterTransactionManager">
         <tx:attributes>
             <tx:method name="insert*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
             <tx:method name="update*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="register*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 
     <!-- cluster 配置事务增强（究竟如何管理事务） -->
-    <tx:advice id="txAdvice" transaction-manager="clusterTransactionManager">
+    <tx:advice id="txAdvice_oracle" transaction-manager="clusterTransactionManager">
         <tx:attributes>
             <tx:method name="insert*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
             <tx:method name="update*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="register*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 
     <!-- 注解aop -->
     <aop:config>
-        <aop:pointcut expression="execution(* com.mace.service_*.*.*(..))" id="pt"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt"/>
+        <aop:pointcut expression="execution(* com.mace.service.*.*(..))" id="pt"/>
+        <aop:advisor advice-ref="txAdvice_mysql" pointcut-ref="pt"/>
+        <aop:advisor advice-ref="txAdvice_oracle" pointcut-ref="pt"/>
     </aop:config>
 
 </beans>
