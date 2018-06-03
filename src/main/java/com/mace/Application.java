@@ -18,7 +18,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * <br />
  * Created by mace on 19:36 2018/5/27.
  */
-@SpringBootApplication//(exclude = {SolrAutoConfiguration.class})//不自动装配solr
+@SpringBootApplication(exclude = {SolrAutoConfiguration.class})//不自动装配solr
 @EnableScheduling//启动定时任务
 @EnableKafka//启用对Kafka的支持
 public class Application {

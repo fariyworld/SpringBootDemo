@@ -182,7 +182,6 @@ spring:
     redis:
       repositories:
         enabled: true
-
 #    solr数据源配置
     solr:
 #      solr服务url
@@ -199,6 +198,7 @@ spring:
       followRedirects: false
       repositories:
         enabled: true
+
   #数据源配置
   datasource:
 #    数据库连接池 druid
