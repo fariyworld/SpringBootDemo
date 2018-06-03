@@ -1,6 +1,7 @@
 package com.mace.controller.mongodb;
 
 import com.mace.common.ResponseMessage;
+import com.mace.domain.User;
 import com.mace.mongodb.service.IMongoService;
 import com.mace.service.mysql.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.annotation.Repeatable;
+import java.util.List;
 
 /**
  * description:
@@ -48,5 +50,21 @@ public class MongoController {
             return ResponseMessage.createBySuccessMessage("批量导入数据至 " +collectionName+ " 成功");
         else
             return ResponseMessage.createBySuccessMessage("批量导入数据至 " +collectionName+ " 失败");
+    }
+
+
+    @RequestMapping(value = "getAll.do")
+    public ResponseMessage<List> getAll(String className, String collectionName){
+
+        try {
+
+            List list = iMongoService.getBeanList(Class.forName(className), collectionName);
+
+            return ResponseMessage.createBySuccess(list);
+
+        } catch (ClassNotFoundException e) {
+
+            return ResponseMessage.createByErrorMessage("没有找到类："+className);
+        }
     }
 }
