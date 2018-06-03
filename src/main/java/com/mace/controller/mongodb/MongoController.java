@@ -27,26 +27,26 @@ public class MongoController {
     private IUserService iUserService;
 
 
-    @RequestMapping(value = "createCollection/{collectionName:.+}")
+    @RequestMapping(value = "createCollection.do/{collectionName:.+}")
     public ResponseMessage<String> createCollection(@PathVariable("collectionName") String collectionName){
 
         log.info("要创建的表名：{}",collectionName);
 
         if(iMongoService.createCollection(collectionName))
-            return ResponseMessage.createBySuccessMessage("创建" +collectionName+ " 成功");
+            return ResponseMessage.createBySuccessMessage("创建 " +collectionName+ " 成功");
         else
-            return ResponseMessage.createBySuccessMessage("创建" +collectionName+ " 失败");
+            return ResponseMessage.createBySuccessMessage("创建 " +collectionName+ " 失败");
     }
 
 
-    @RequestMapping(value = "importData/{collectionName}")
+    @RequestMapping(value = "importData.do/{collectionName}")
     public ResponseMessage<String> importData(@PathVariable("collectionName") String collectionName){
 
         log.info("要导入数据的表名：{}",collectionName);
 
-        if(iMongoService.insert(iUserService.findAll(), collectionName))
-            return ResponseMessage.createBySuccessMessage("导入数据至" +collectionName+ " 成功");
+        if(iMongoService.batchInsert(iUserService.findAll(), collectionName))
+            return ResponseMessage.createBySuccessMessage("批量导入数据至 " +collectionName+ " 成功");
         else
-            return ResponseMessage.createBySuccessMessage("导入数据至" +collectionName+ " 失败");
+            return ResponseMessage.createBySuccessMessage("批量导入数据至 " +collectionName+ " 失败");
     }
 }
