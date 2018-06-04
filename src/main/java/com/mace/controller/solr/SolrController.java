@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SolrController {
 
     @Autowired
-    private ISolrService<Dept> iSolrService;
+    private ISolrService<Dept,String> iSolrService;
 
     @RequestMapping(value = "getById.do/{id}")
     public ResponseMessage<Dept> set(@PathVariable String id, String collectionName){
@@ -26,5 +26,11 @@ public class SolrController {
         Dept dept = iSolrService.getById(id, collectionName, Dept.class);
 
         return ResponseMessage.createBySuccess(dept);
+    }
+
+    @RequestMapping(value = "count.do/{collectionName}")
+    public ResponseMessage<Long> count(@PathVariable String collectionName){
+
+        return ResponseMessage.createBySuccess(iSolrService.count(collectionName));
     }
 }
