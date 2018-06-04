@@ -58,7 +58,7 @@ public class WebLogAspect {
             log.info("request参数===========================================end");
         }
 
-        if(!Arrays.toString(joinPoint.getArgs()).equals("[{}]") && !Arrays.toString(joinPoint.getArgs()).equals("[]")){
+        if(!Arrays.toString(joinPoint.getArgs()).equals("[]")){
             log.info("URL_PATH参数: {}",Arrays.toString(joinPoint.getArgs()));
         }
 
