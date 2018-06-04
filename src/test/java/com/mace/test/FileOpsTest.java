@@ -15,9 +15,11 @@ public class FileOpsTest {
 
     public static void main(String[] args) {
 
-        rename("C:\\Users\\15257\\Desktop\\wh_mr_bak");
-        deleteEmptyDirectory("C:\\Users\\15257\\Desktop\\wh_mr_bak");
-        System.out.println("rename and replace and deleteEmptyDirectory success");
+//        rename("C:\\Users\\15257\\Desktop\\wh_mr_bak");
+//        deleteEmptyDirectory("C:\\Users\\15257\\Desktop\\wh_mr_bak");
+//        System.out.println("rename and replace and deleteEmptyDirectory success");
+
+        System.out.println(StringUtils.isNotEmpty(""));
     }
 
     /**

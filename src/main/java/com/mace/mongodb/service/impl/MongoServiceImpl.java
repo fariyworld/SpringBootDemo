@@ -58,6 +58,7 @@ public class MongoServiceImpl<T> implements IMongoService<T> {
     public boolean update(T t, String collectionName){
 
         try {
+            //save 保存或者更新
             mongoTemplate.save(t, collectionName);
             return true;
         } catch (Exception e) {
