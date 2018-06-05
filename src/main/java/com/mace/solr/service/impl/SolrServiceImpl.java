@@ -151,45 +151,30 @@ public class SolrServiceImpl<T,ID> implements ISolrService<T,ID> {
 //    Criteria: dept_keywords:keywords 按:分隔， keywords按,分隔
 //    theme: em:red 按:分隔， 样式:颜色
     @Override
-    public HighlightPage<T> queryForHighlightPage(String collectionName, Map<String, String> criteriaMaps,
+    public HighlightPage<T> queryForHighlightPage(String collectionName, String queryString,
+                                                  Map<String, String> criteriaMaps,
                                                   Class<T> clazz, String theme, String... fieldName){
 
-        HighlightQuery query=new SimpleHighlightQuery();
+        HighlightQuery query = ( SimpleHighlightQuery) assembleSolrQuery(queryString, criteriaMaps);
 
-        HighlightOptions highlightOptions=new HighlightOptions().addField(fieldName);//设置高亮的域
+//        HighlightQuery query = new SimpleHighlightQuery();
 
-        if (theme == null || StringUtils.isBlank(theme)){
+        //设置高亮的域
+        HighlightOptions highlightOptions=new HighlightOptions().addField(fieldName);
 
-            theme = "em:red";
-        }
-
+        //设置高亮主题
+        if (theme == null || StringUtils.isBlank(theme))    theme = "em:red";
         String[] themes = splitKeyValue(theme);
         String prefix = "<" + themes[0] + " style='color:" + themes[1] +"'>";
         String postfix = "</" + themes[0] + ">";
-
-        highlightOptions.setSimplePrefix(prefix);//高亮前缀
-        highlightOptions.setSimplePostfix(postfix);//高亮后缀
+        //高亮前缀
+        highlightOptions.setSimplePrefix(prefix);
+        //高亮后缀
+        highlightOptions.setSimplePostfix(postfix);
 
         query.setHighlightOptions(highlightOptions);//设置高亮选项
 
-//        按照关键字查询
-//        String[] criteriaKeyValue = splitKeyValue(criteriaStr);
-//        Criteria criteria=new Criteria(criteriaKeyValue[0]).is(criteriaKeyValue[1]);
-        if(criteriaMaps != null && criteriaMaps.size() >0){
-
-            Criteria criteria = new Criteria();
-
-            Set<Map.Entry<String, String>> entrySet = criteriaMaps.entrySet();
-
-            for(Map.Entry<String, String> entry : entrySet){
-
-                criteria.and(entry.getKey()).contains(entry.getValue());
-            }
-
-            query.addCriteria(criteria);
-        }
-
-
+        //高亮查询
         HighlightPage<T> ts = solrTemplate.queryForHighlightPage(collectionName, query, clazz);
 
         //遍历高亮入口集合
@@ -225,26 +210,10 @@ public class SolrServiceImpl<T,ID> implements ISolrService<T,ID> {
 
     //Criteria: dept_keywords:keywords 按:分隔， keywords按,分隔
     @Override
-    public GroupPage<T> queryForGroupPage(String collectionName, Map<String, String> criteriaMaps, String groupField, Class<T> clazz){
+    public GroupPage<T> queryForGroupPage(String collectionName, String queryString,
+                                          Map<String, String> criteriaMaps, String groupField, Class<T> clazz){
 
-        Query query = new SimpleQuery();
-
-//        按照关键字查询
-//        String[] criteriaKeyValue = splitKeyValue(criteriaStr);
-//        Criteria criteria=new Criteria(criteriaKeyValue[0]).is(criteriaKeyValue[1]);
-        if(criteriaMaps != null && criteriaMaps.size() >0){
-
-            Criteria criteria = new Criteria();
-
-            Set<Map.Entry<String, String>> entrySet = criteriaMaps.entrySet();
-
-            for(Map.Entry<String, String> entry : entrySet){
-
-                criteria.and(entry.getKey()).contains(entry.getValue());
-            }
-
-            query.addCriteria(criteria);
-        }
+        Query query = assembleSolrQuery(queryString, criteriaMaps);
 
         //设置分组选项
         GroupOptions groupOptions=new GroupOptions().addGroupByField(groupField);

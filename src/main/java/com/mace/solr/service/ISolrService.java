@@ -162,20 +162,22 @@ public interface ISolrService<T,ID>  {
      * @param fieldName
      * @return: org.springframework.data.solr.core.query.result.HighlightPage<T>
      */
-    HighlightPage<T> queryForHighlightPage(String collectionName, Map<String, String> criteriaMaps,
+    HighlightPage<T> queryForHighlightPage(String collectionName, String queryString,
+                                           Map<String, String> criteriaMaps,
                                            Class<T> clazz, String theme, String... fieldName);
 
 
     /**
      * description: 分组查询
      * <br /><br />
-     * create by mace on 2018/6/4 15:54.
+     * create by mace on 2018/6/5 8:49.
      * @param collectionName
+     * @param queryString
      * @param criteriaMaps
      * @param groupField
      * @param clazz
      * @return: org.springframework.data.solr.core.query.result.GroupPage<T>
      */
-    GroupPage<T> queryForGroupPage(String collectionName, Map<String, String> criteriaMaps,
-                                   String groupField, Class<T> clazz);
+    GroupPage<T> queryForGroupPage(String collectionName, String queryString,
+                                   Map<String, String> criteriaMaps, String groupField, Class<T> clazz);
 }

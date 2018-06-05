@@ -42,15 +42,15 @@ public class SolrController {
 
     @RequestMapping(value = "queryForHighlightPage.do/{collectionName}")
     public ResponseMessage<HighlightPage<Dept>> queryForHighlightPage(@PathVariable String collectionName,
-                                                        String criteriaKey,
-                                                        String criteriaValue,
-                                                        String theme){
+                                                        String criteriaKey, String criteriaValue,
+                                                        String theme, String filedName){
 
         Map<String,String> criteriaMaps = Maps.newHashMap();
 
         criteriaMaps.put(criteriaKey, criteriaValue);
 
-        HighlightPage<Dept> deptHighlightPage = iSolrService.queryForHighlightPage(collectionName, criteriaMaps, Dept.class, theme);
+        HighlightPage<Dept> deptHighlightPage = iSolrService.queryForHighlightPage(collectionName, null,
+                criteriaMaps, Dept.class, theme, filedName);
 
         return ResponseMessage.createBySuccess(deptHighlightPage);
     }
@@ -66,7 +66,8 @@ public class SolrController {
 
         criteriaMaps.put(criteriaKey, criteriaValue);
 
-        GroupPage<Dept> deptGroupPage = iSolrService.queryForGroupPage(collectionName, criteriaMaps, groupField, Dept.class);
+        GroupPage<Dept> deptGroupPage = iSolrService.queryForGroupPage(collectionName, null,
+                criteriaMaps, groupField, Dept.class);
 
         return ResponseMessage.createBySuccess(deptGroupPage);
     }
