@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.mace.common.ResponseMessage;
 import com.mace.entity.Dept;
 import com.mace.solr.service.ISolrService;
+import org.apache.solr.client.solrj.response.QueryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.data.solr.core.query.result.HighlightPage;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,27 +51,22 @@ public class SolrController {
 
         criteriaMaps.put(criteriaKey, criteriaValue);
 
-        HighlightPage<Dept> deptHighlightPage = iSolrService.queryForHighlightPage(collectionName, null,
-                criteriaMaps, Dept.class, theme, filedName);
+        HighlightPage<Dept> deptHighlightPage = iSolrService.queryForHighlightPage(collectionName, criteriaMaps,
+                Dept.class, theme, filedName);
 
         return ResponseMessage.createBySuccess(deptHighlightPage);
     }
 
 
     @RequestMapping(value = "queryForGroupPage.do/{collectionName}")
-    public ResponseMessage<GroupPage<Dept>> queryForGroupPage(@PathVariable String collectionName,
-                                                                      String criteriaKey,
-                                                                      String criteriaValue,
+    public ResponseMessage<Map<String, List<Dept>>> queryForGroupPage(@PathVariable String collectionName,
+                                                                      String queryString,
                                                                       String groupField){
 
-        Map<String,String> criteriaMaps = Maps.newHashMap();
+        Map<String, List<Dept>> map = iSolrService.queryForGroupPage(collectionName, queryString,
+                                                                     groupField, Dept.class);
 
-        criteriaMaps.put(criteriaKey, criteriaValue);
-
-        GroupPage<Dept> deptGroupPage = iSolrService.queryForGroupPage(collectionName, null,
-                criteriaMaps, groupField, Dept.class);
-
-        return ResponseMessage.createBySuccess(deptGroupPage);
+        return ResponseMessage.createBySuccess(map);
     }
 
 }

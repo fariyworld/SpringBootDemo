@@ -1,11 +1,12 @@
 package com.mace.solr.service;
 
-import org.springframework.data.solr.core.query.SolrDataQuery;
+import org.apache.solr.client.solrj.response.QueryResponse;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.data.solr.core.query.result.ScoredPage;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -98,19 +99,21 @@ public interface ISolrService<T,ID>  {
      * @param clazz
      * @return: java.util.Collection<T>
      */
-    Collection<T> findAll(String collectionName, Collection<String> ids, Class<T> clazz);
+    Collection<T> getByIds(String collectionName, Collection<String> ids, Class<T> clazz);
 
 
     /**
-     * description: 根据 query 去指定 core 查询
+     * description: 条件查询
      * <br /><br />
-     * create by mace on 2018/6/4 13:35.
+     * create by mace on 2018/6/5 11:20.
      * @param collectionName
      * @param queryString
+     * @param criteriaMaps
      * @param clazz
      * @return: java.util.Collection<T>
      */
-    Collection<T> findAll(String collectionName, String queryString, Class<T> clazz);
+    Collection<T> getByCriteria(String collectionName, String queryString,
+                          Map<String, String> criteriaMaps, Class<T> clazz);
 
 
     /**
@@ -162,13 +165,12 @@ public interface ISolrService<T,ID>  {
      * @param fieldName
      * @return: org.springframework.data.solr.core.query.result.HighlightPage<T>
      */
-    HighlightPage<T> queryForHighlightPage(String collectionName, String queryString,
-                                           Map<String, String> criteriaMaps,
+    HighlightPage<T> queryForHighlightPage(String collectionName, Map<String, String> criteriaMaps,
                                            Class<T> clazz, String theme, String... fieldName);
 
 
     /**
-     * description: 分组查询
+     * description: 分组查询 还未成功
      * <br /><br />
      * create by mace on 2018/6/5 8:49.
      * @param collectionName
@@ -178,6 +180,14 @@ public interface ISolrService<T,ID>  {
      * @param clazz
      * @return: org.springframework.data.solr.core.query.result.GroupPage<T>
      */
-    GroupPage<T> queryForGroupPage(String collectionName, String queryString,
+    GroupPage<T> queryForGroupPage1(String collectionName, String queryString,
                                    Map<String, String> criteriaMaps, String groupField, Class<T> clazz);
+
+
+    GroupPage<T> queryForGroupPage2(String collectionName, String queryString,
+                                    Map<String, String> criteriaMaps, String groupField, Class<T> clazz);
+
+
+    Map<String, List<T>> queryForGroupPage(String collectionName, String queryString,
+                                           String groupField, Class<T> clazz);
 }
