@@ -3,12 +3,14 @@ package com.mace.controller.solr;
 import com.google.common.collect.Maps;
 import com.mace.common.ResponseMessage;
 import com.mace.entity.Dept;
+import com.mace.solr.bean.SolrGroupAttribute;
 import com.mace.solr.service.ISolrService;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,14 +59,26 @@ public class SolrController {
         return ResponseMessage.createBySuccess(deptHighlightPage);
     }
 
+    @RequestMapping(value = "queryForHighlightPageByMap.do/{collectionName}")
+    public ResponseMessage<HighlightPage<Dept>> queryForHighlightPageByMap(@PathVariable String collectionName,
+                                                                      @RequestBody Map<String,String> criteriaMaps,
+                                                                      String theme, String filedName){
+
+        HighlightPage<Dept> deptHighlightPage = iSolrService.queryForHighlightPage(collectionName, criteriaMaps,
+                Dept.class, theme, filedName);
+
+        return ResponseMessage.createBySuccess(deptHighlightPage);
+    }
+
+
 
     @RequestMapping(value = "queryForGroupPage.do/{collectionName}")
     public ResponseMessage<Map<String, List<Dept>>> queryForGroupPage(@PathVariable String collectionName,
                                                                       String queryString,
-                                                                      String groupField){
+                                                                      SolrGroupAttribute attribute){
 
         Map<String, List<Dept>> map = iSolrService.queryForGroupPage(collectionName, queryString,
-                                                                     groupField, Dept.class);
+                attribute, Dept.class);
 
         return ResponseMessage.createBySuccess(map);
     }

@@ -3,7 +3,9 @@ package com.mace.solr.service.impl;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.mace.solr.bean.SolrGroupAttribute;
 import com.mace.solr.service.ISolrService;
+import io.lettuce.core.GeoArgs;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.SolrClient;
@@ -12,6 +14,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.*;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.apache.solr.common.params.GroupParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -270,7 +273,7 @@ public class SolrServiceImpl<T,ID> implements ISolrService<T,ID> {
     //分组查询
     @Override
     public Map<String, List<T>> queryForGroupPage(String collectionName, String queryString,
-                                                  String groupField, Class<T> clazz) {
+                                                  SolrGroupAttribute attribute, Class<T> clazz) {
 
         Map<String, List<T>> map = Maps.newHashMap();
 
@@ -280,7 +283,7 @@ public class SolrServiceImpl<T,ID> implements ISolrService<T,ID> {
 
         try {
 
-            response = solrClient.query(collectionName, assembleSolrGroupQuery(queryString,groupField));
+            response = solrClient.query(collectionName, assembleSolrGroupQuery(queryString,attribute));
 
             if(response.getStatus() == 0){
 
@@ -373,17 +376,50 @@ public class SolrServiceImpl<T,ID> implements ISolrService<T,ID> {
     }
 
 
-    private static SolrQuery assembleSolrGroupQuery(String queryString, String groupField){
+    private static SolrQuery assembleSolrGroupQuery(String queryString, SolrGroupAttribute attribute/*String groupField*/){
+
         SolrQuery query = new SolrQuery(queryString);
 
+        query.set(GroupParams.GROUP,true);
+
+        //把SolrGroupAttribute中属性不为null的属性值放到SolrQuery中
+
+        String field = attribute.getField();
+        if(field != null && StringUtils.isNotBlank(field))              query.set(GroupParams.GROUP_FIELD,field);
+
+        String function = attribute.getFunction();
+        if(function != null && StringUtils.isNotBlank(function))        query.set(GroupParams.GROUP_FUNC,function);
+
+        String groupQuery = attribute.getQuery();
+        if(groupQuery != null && StringUtils.isNotBlank(groupQuery))    query.set(GroupParams.GROUP_QUERY,groupQuery);
+
+        query.set("rows",attribute.getRows());
+        query.set("start",attribute.getStart());
+        query.set(GroupParams.GROUP_LIMIT,attribute.getLimit());
+        query.set(GroupParams.GROUP_OFFSET,attribute.getOffset());
+
+        String sort = attribute.getSort();
+        if(sort != null && StringUtils.isNotBlank(sort))                query.setParam("sort",sort);
+
+        String groupSort = attribute.getGroupSort();
+        if(groupSort != null && StringUtils.isNotBlank(groupSort))      query.setParam(GroupParams.GROUP_SORT,groupSort);
+
+        String format = attribute.getFormat();
+        if(format != null && StringUtils.isNotBlank(format))            query.setParam(GroupParams.GROUP_FORMAT,format);
+
+        query.setParam(GroupParams.GROUP_MAIN,attribute.isMainGroup());
+        query.setParam(GroupParams.GROUP_TOTAL_COUNT,attribute.isNgroups());
+        query.setParam(GroupParams.GROUP_TRUNCATE,attribute.isTruncate());
+        query.set(GroupParams.GROUP_CACHE_PERCENTAGE,attribute.getCache());
+
 //        需要分组的字段
-        query.set("group.field",groupField);
+//        query.set("group.field",groupField);
 //        设为true，表示结果需要分组
-        query.set("group",true);
+//        query.set("group",true);
 //        设为true时，Solr将返回分组数量，默认fasle
-        query.set("group.ngroups",true);
+//        query.set("group.ngroups",true);
 //        每组返回多数条结果,默认1
-        query.set("group.limit",10);
+//        query.set("group.limit",10);
 
         return query;
     }

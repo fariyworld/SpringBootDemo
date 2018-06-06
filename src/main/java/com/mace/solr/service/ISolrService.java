@@ -1,5 +1,6 @@
 package com.mace.solr.service;
 
+import com.mace.solr.bean.SolrGroupAttribute;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.springframework.data.solr.core.query.result.GroupPage;
 import org.springframework.data.solr.core.query.result.HighlightPage;
@@ -189,5 +190,5 @@ public interface ISolrService<T,ID>  {
 
 
     Map<String, List<T>> queryForGroupPage(String collectionName, String queryString,
-                                           String groupField, Class<T> clazz);
+                                           SolrGroupAttribute attribute, Class<T> clazz);
 }
