@@ -1,12 +1,8 @@
 package com.mace.controller.ftp;
 
-import com.google.common.collect.Maps;
 import com.mace.common.Constant;
-import com.mace.common.ResponseCode;
 import com.mace.common.ResponseMessage;
-import com.mace.ftp.config.FTPProperties;
 import com.mace.ftp.service.IFTPService;
-import com.mace.mongodb.util.MongoOpsUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +50,6 @@ public class FTPController {
      * description:     多文件上传   上传文件至 images/other/
      * <br /><br />
      * create by mace on 2018/5/28 16:02.
-     * @param size      默认文件个数限制为2个
      * @param name      input type="file" 的 name属性
      * @param request
      * @return: com.mace.common.ResponseMessage<java.util.Map<java.lang.String,java.lang.String>>
@@ -74,5 +69,22 @@ public class FTPController {
     }
 
 
+//    ftp://192.168.88.132/images/other/5b18c851a623e42c90eb1cbc.jpg
 
+
+//    @RequestMapping(value = "downloadFile.do")
+//    public ResponseMessage<String> downloadFile(){
+//
+//        String savePath = "D:\\WebLogs\\SpringBootDemo\\download\\images\\other\\";
+//        String url = "ftp://192.168.88.132/images/other/5b18c851a623e42c90eb1cbc.jpg";
+//
+//        return iftpService.downloadFile(url, savePath);
+//    }
+
+
+    @RequestMapping(value = "downloadFile.do")
+    public ResponseMessage<String> downloadFile(String url, HttpServletResponse response){
+
+        return iftpService.downloadFile(url, response);
+    }
 }
