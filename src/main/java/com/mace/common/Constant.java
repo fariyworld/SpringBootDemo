@@ -19,6 +19,19 @@ public class Constant {
     //当前用户常量 key
     public static final String CURRENT_USER = "current_user";
 
+    public interface Redis{
+
+        String KEY_USER_CART_PREFIX = "cartMap:";
+    }
+
+    public interface Cookie{
+
+        String OFF_LINE_SHOPPING_CART_ID = "off_line_shopping_cart_id";
+        int HALF_HOUR = 30 * 60;
+        int ONE_WEEK = 7 * 24 * 3600;
+        int ONE_MONTH = 30 * 24 * 3600;
+    }
+
     //角色
     public interface Role{
         int ROLE_CUSTOMER = 0; //普通用户

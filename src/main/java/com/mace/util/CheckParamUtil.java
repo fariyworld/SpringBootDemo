@@ -54,5 +54,7 @@ public class CheckParamUtil {
                 break;
             }
         }
+
+        System.out.println(StringHelper.getUUIDString().length());
     }
 }

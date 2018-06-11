@@ -17,4 +17,18 @@ public class SimpleRabbitConfig {
         //true 队列持久
         return new Queue("spring-boot-queue", false);
     }
+
+
+    /**
+     * description:  redis 离线购物车消息队列
+     * <br /><br />
+     * create by mace on 2018/6/11 11:50.
+     * @param
+     * @return: org.springframework.amqp.core.Queue
+     */
+    @Bean
+    public Queue RedisOffLineCartMessage() {
+        return new Queue("redis_off_line_cart", true);
+    }
+
 }

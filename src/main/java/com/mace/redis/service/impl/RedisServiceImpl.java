@@ -110,6 +110,12 @@ public class RedisServiceImpl implements IRedisService {
         redisTemplate.opsForHash().put(key, hashKey, value);
     }
 
+
+    public void put(String key, String hashKey, long value){
+
+        redisTemplate.opsForHash().put(key, hashKey, value);
+    }
+
     public void putAll(String key,Map<String,String> map){
 
         redisTemplate.opsForHash().putAll(key, map);
@@ -119,6 +125,13 @@ public class RedisServiceImpl implements IRedisService {
 
         return redisTemplate.opsForHash().putIfAbsent(key, hashKey, value);
     }
+
+
+    public boolean putIfAbsent(String key, String hashKey, long value){
+
+        return redisTemplate.opsForHash().putIfAbsent(key, hashKey, value);
+    }
+
 
 
     /**
@@ -152,6 +165,7 @@ public class RedisServiceImpl implements IRedisService {
      * @return
      */
     public Double increment(String key, String hashKey,Double number){
+
         return redisTemplate.opsForHash().increment(key, hashKey, number);
     }
 

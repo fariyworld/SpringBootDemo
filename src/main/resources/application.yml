@@ -109,8 +109,10 @@ spring:
     password: ENC(Qml0BS/5j8LD9dyKa+Eo/Y4DhmGofWLQ)
     connection-timeout: 1m
     virtual-host: /rabbitmq_host001
-#    消息的回调
+#    确认是否正确到达 Exchange 中
     publisher-confirms: true
+#    启动消息失败返回
+    publisher-returns: true
 
 #  kafka配置
   kafka:
@@ -250,7 +252,7 @@ spring:
       #mysql检查数据库连接 oracle select 1 from dual
       validation-query: select 1
       #stat 监控 wall sql注入
-      filters: stat,wall
+      filters: stat,wall,log4j
       filter:
         stat:
           merge-sql: true

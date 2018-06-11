@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class HelloTask {
 
-    //每天早上9-10点，间隔一分钟执行任务
+    //每天早上9-10点，间隔一分钟执行任务 cron表达式可以是 6个 也可以是 7个
     @Scheduled(cron = "0 0/1 * * 6 ?")
     @Async
     public void helloScheduleTask(){

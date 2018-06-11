@@ -188,7 +188,63 @@ public interface IRedisService {
      * @param key
      * @param hashKey
      * @param value
-     * @return: boolean
+     * @return: boolean 仅当 hashKey 不存在时才设置散列 hashKey 的值
      */
     boolean putIfAbsent(String key, String hashKey, String value);
+
+
+    /**
+     * description: 添加 hash 键值对. 不存在的时候才添加
+     * <br /><br />
+     * create by mace on 2018/6/8 18:01.
+     * @param key
+     * @param hashKey
+     * @param value
+     * @return: boolean 仅当 hashKey 不存在时才设置散列 hashKey 的值
+     */
+    boolean putIfAbsent(String key, String hashKey, long value);
+
+
+    /**
+     * description: 验证指定 key 下 有没有指定的 hashkey
+     * <br /><br />
+     * create by mace on 2018/6/8 17:53.
+     * @param key       outerkey
+     * @param hashKey   innerkey
+     * @return: boolean
+     */
+    boolean hashKey(String key,String hashKey);
+
+
+    /**
+     * description: 给指定 hash 的 hashkey 做增减操作
+     * <br /><br />
+     * create by mace on 2018/6/8 18:02.
+     * @param key
+     * @param hashKey
+     * @param number
+     * @return: java.lang.Long
+     */
+    Long increment(String key, String hashKey,long number);
+
+
+    /**
+     * description: 获取指定 key 下的 hashKey 的 value
+     * <br /><br />
+     * create by mace on 2018/6/9 15:33.
+     * @param key
+     * @param hashKey
+     * @return: java.lang.Object
+     */
+    Object getHashKey(String key, String hashKey);
+
+
+    /**
+     * description: 获取指定 key 下的 所有 hashKey、hashValue
+     * <br /><br />
+     * create by mace on 2018/6/11 11:36.
+     * @param key
+     * @return: java.util.Map<java.lang.Object,java.lang.Object>
+     */
+    Map<Object,Object> getHashEntries(String key);
 }
