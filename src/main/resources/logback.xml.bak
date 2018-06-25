@@ -1,5 +1,5 @@
 <!--<?xml version="1.0" encoding="UTF-8"?>-->
-<configuration debug="false">
+<configuration debug="false" scan="true" scanPeriod="1000">
     <!--
 		说明：
 		1.日志级别及文件
@@ -131,7 +131,7 @@
         <encoder>
             <!-- %d日期,%p日志级别,%file文件名,%line所在行数,%m输出的信息,%n换行 -->
             <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%c] [%thread] %-5level %logger{50} - %msg %n</pattern>-->
-            <pattern>%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger) - %cyan(%msg%n)</pattern>
+            <!--<pattern>%red(%d{yyyy-MM-dd HH:mm:ss.SSS}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger) - %cyan(%msg%n)</pattern>-->
             <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}  %highlight(%-5level) -&#45;&#45; [%thread]  %boldMagenta(%logger{50})  :  %msg%n</pattern>-->
             <!--<pattern>${CONSOLE_LOG_PATTERN}</pattern>-->
             <!--字符编码-->

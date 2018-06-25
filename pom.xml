@@ -31,8 +31,9 @@
         <mybatis-pagehelper-version>1.2.3</mybatis-pagehelper-version>
         <ojdbc6-version>11.2.0.3</ojdbc6-version>
         <mybatis-generator-version>1.3.2</mybatis-generator-version>
-        <zookeeper-version>3.4.6</zookeeper-version>
-        <fastjson-version>1.2.7</fastjson-version>
+        <fastjson-version>1.2.47</fastjson-version>
+        <swagger-version>2.7.0</swagger-version>
+        <restpack-version>1.0.1</restpack-version>
         <common-net-version>1.6</common-net-version>
         <ftp-version>3.1</ftp-version>
         <google-collections-version>1.0</google-collections-version>
@@ -50,6 +51,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- springboot 安全认证 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!-- 添加 支持常规的测试依赖，包括JUnit、Hamcrest、Mockito以及spring-test模块 -->
         <dependency>
@@ -165,6 +171,24 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>compile</scope>
+        </dependency>
+
+        <!--
+            Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务。
+            总体目标是使客户端和文件系统作为服务器以同样的速度来更新。
+            文件的方法，参数和模型紧密集成到服务器端的代码，允许API来始终保持同步。
+        -->
+        <!-- springfox-swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger-version}</version>
+        </dependency>
+        <!-- springfox-swagger-ui -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger-version}</version>
         </dependency>
 
         <!-- solr安全认证后java客户端访问增加依赖commons-codec -->

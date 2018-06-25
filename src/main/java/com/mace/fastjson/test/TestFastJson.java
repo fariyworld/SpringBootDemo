@@ -1,11 +1,15 @@
 package com.mace.fastjson.test;
 
+import com.google.common.collect.Sets;
 import com.mace.entity.Dept;
 import com.mace.fastjson.util.FastJsonUtil;
 import com.mace.kafka.bean.Message;
 import com.mace.util.DateUtil;
 
+import javax.sound.midi.Soundbank;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * description: alibaba.fastjson工具类
@@ -36,5 +40,15 @@ public class TestFastJson {
         Message message = FastJsonUtil.toBean(jsonString, Message.class);
 
         System.out.println(message);
+
+        Set<String> set = Sets.newHashSet();
+
+        set.add("001");
+        set.add("002");
+        set.add("003");
+        set.add("004");
+
+        String s = FastJsonUtil.toJSONString(set);
+        System.out.println(s);
     }
 }

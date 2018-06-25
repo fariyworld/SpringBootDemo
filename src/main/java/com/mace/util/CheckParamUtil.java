@@ -16,7 +16,7 @@ public class CheckParamUtil {
      * <br /><br />
      * create by mace on 2018/6/7 12:25.
      * @param str
-     * @return: boolean  true 合法
+     * @return: boolean  true 合法  false 非法
      */
     public static boolean isEffective(String str){
 

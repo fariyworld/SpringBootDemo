@@ -1,10 +1,12 @@
 package com.mace.util;
 
+import com.google.common.collect.Maps;
+
 import java.util.Map;
 import java.util.Set;
 
 /**
- * description: 集合相关工具类 ergod
+ * description: 集合相关工具类
  * <br />
  * Created by mace on 10:15 2018/6/11.
  */
@@ -17,7 +19,7 @@ public class CollectionHelper {
      * @param map
      * @return: void
      */
-    public static <K, V> void iterSimpleMap(Map<K, V> map){
+    public static <K, V> void iter(Map<K, V> map){
 
         Set<Map.Entry<K, V>> entrySet = map.entrySet();
 
@@ -26,4 +28,14 @@ public class CollectionHelper {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }
+
+    public static void main(String[] args) {
+
+        Map<String, Integer> map = Maps.newHashMap();
+        map.put("hello", 1);
+        map.put("world", 2);
+        map.put("hadoop", 3);
+        iter(map);
+    }
+
 }

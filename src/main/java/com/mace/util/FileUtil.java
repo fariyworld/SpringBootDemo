@@ -2,9 +2,10 @@ package com.mace.util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
+import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * description:
@@ -18,6 +19,8 @@ public class FileUtil {
         rename("D:\\BONC\\tj\\20180607\\mrpoint_bak");
         deleteEmptyDirectory("D:\\BONC\\tj\\20180607\\mrpoint_bak");
         System.out.println("rename and replace and deleteEmptyDirectory success");
+
+
     }
 
     /**
@@ -52,7 +55,7 @@ public class FileUtil {
                         String newPath = path+File.separator+oldname+".txt";
                         elementFile.renameTo(new File(newPath));
                         //修改文件内容
-                        modifyFileContent(newPath, "0 ", StringUtils.EMPTY);
+                        FileManagerUtil.modifyFileContent(newPath, "0 ", StringUtils.EMPTY);
                     }else {
                         //不符合
                         //删除
@@ -63,44 +66,7 @@ public class FileUtil {
         }
     }
 
-    /**
-     * description: 使用随机流 修改文件内容
-     * <br /><br />
-     * create by mace on 2018/5/6 12:56.
-     * @param filePath
-     * @param target          0\t
-     * @param replacement     ""
-     * @return: void
-     */
-    public static void modifyFileContent(String filePath, String target, String replacement){
 
-        RandomAccessFile raf = null;
-
-        try {
-            raf = new RandomAccessFile(filePath, "rw");
-            String lineTxt = null;
-            long lastPoint = 0;//上一次的偏移量
-            while ((lineTxt = raf.readLine())!=null){
-                long filePointer = raf.getFilePointer();
-                if(lineTxt.contains(target)){
-                    String str = lineTxt.replace(target, replacement);
-                    raf.seek(lastPoint);
-                    raf.writeBytes(str);
-                }
-                lastPoint = filePointer;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            //释放资源
-            try {
-                raf.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     /**
      * description: 删除空目录
