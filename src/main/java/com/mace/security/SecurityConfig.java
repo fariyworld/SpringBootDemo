@@ -52,7 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources/**",
                         "/configuration/security",
                         "/swagger-ui.html/**",
-                        "/webjars/**").permitAll()
+                        "/webjars/**",
+                        "/api2doc/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .logout()
@@ -61,7 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .permitAll()
                 .and().httpBasic();
-
+        // 问题：为了帮助保护在此网站中输入的信息的安全，此内容的发布者不允许在框架中显示该信息。
+        // 原因：spring security安全框架设置了默认的X-Frame-Options为DENY,更改spring security配置
+        // 解决代码
+        http.headers().frameOptions().disable();
         http.csrf().disable();
     }
 }

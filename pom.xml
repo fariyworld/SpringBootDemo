@@ -33,6 +33,7 @@
         <mybatis-generator-version>1.3.2</mybatis-generator-version>
         <fastjson-version>1.2.47</fastjson-version>
         <swagger-version>2.7.0</swagger-version>
+        <api2doc-version>1.0.1</api2doc-version>
         <restpack-version>1.0.1</restpack-version>
         <common-net-version>1.6</common-net-version>
         <ftp-version>3.1</ftp-version>
@@ -191,6 +192,75 @@
             <version>${swagger-version}</version>
         </dependency>
 
+        <!-- 比 Swagger2 好用, @EnableApi2Doc 文档访问地址： http://你的项目地址/api2doc/home.html -->
+        <dependency>
+            <groupId>com.github.terran4j</groupId>
+            <artifactId>terran4j-commons-api2doc</artifactId>
+            <version>${api2doc-version}</version>
+        </dependency>
+
+        <!-- 帮助 Restful API 的开发者将API 的返回结果自动包装成统一格式的报文 -->
+        <!--
+           success:{
+                    "requestId": "8492ea07e6114a11a4f59d90ebb6582c",
+                    "serverTime": 1529994345583,
+                    "spendTime": 32,
+                    "resultCode": "success",
+                    "data": "Hello mace"
+                   }
+
+            aop-success: {
+                            "requestId": "9c09978a83c248388be7485eae1d774c",
+                            "serverTime": "2018-06-26 16:36:11.077",
+                            "spendTime": 1,
+                            "resultCode": "success",
+                            "message": "测试成功",
+                            "data": "Hello mace"
+                         }
+
+             fail:  {
+                      "requestId" : "d7ab68ac513e4549896aa33f0cda3518",
+                      "serverTime" : 1502594589673,
+                      "spendTime" : 8,
+                      "resultCode" : "name.duplicate",
+                      "message" : "昵称重复： terran4j，请换个昵称！",
+                      "props" : {
+                        "name": "terran4j"
+                      }
+                    }
+
+             aop-fail: {
+                        "requestId": "2008b03840bd4531b6be220828ceda0d",
+                        "serverTime": "2018-06-26 17:51:39.028",
+                        "spendTime": 864,
+                        "resultCode": "name.duplicate",
+                        "message": "昵称重复: mace ,请换个昵称!",
+                        "props":{
+                        "username": "mace"
+                        }
+                    }
+
+             aop-exception: {
+                                "requestId": "f6563a76417549888cf326d4cd92e545",
+                                "serverTime": "2018-06-27 12:37:00.797",
+                                "spendTime": 6,
+                                "resultCode": "exception",
+                                "message": "class java.lang.ArithmeticException",
+                                "data": {
+                                "ex_message": "/ by zero",
+                                "stackTrace": "com.mace.controller.test.TestSwaggerController.testEx(TestSwaggerController.java:71)",
+                                "url": "http://127.0.0.1:8088/swagger/testEx.do"
+                                }
+                            }
+
+        -->
+        <dependency>
+            <groupId>com.github.terran4j</groupId>
+            <artifactId>terran4j-commons-restpack</artifactId>
+            <version>${restpack-version}</version>
+        </dependency>
+
+
         <!-- solr安全认证后java客户端访问增加依赖commons-codec -->
         <dependency>
             <groupId>commons-codec</groupId>
@@ -214,7 +284,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-
 
 
     </dependencies>
@@ -243,6 +312,7 @@
                     <mainClass>com.mace.Application</mainClass>
                 </configuration>
             </plugin>
+
         </plugins>
 
         <resources>

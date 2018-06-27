@@ -1,6 +1,6 @@
 package com.mace.test;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.mace.common.RestPackResponseCode;
 
 /**
  * description:
@@ -11,9 +11,16 @@ public class App1 {
 
     public static void main(String[] args) {
 
-        BCryptPasswordEncoder encoder =new BCryptPasswordEncoder();
-        String pwd = "liuye0425";
+//        BCryptPasswordEncoder encoder =new BCryptPasswordEncoder();
+//        String pwd = "liuye0425";
 //        $2a$10$n8iAWNartbvVTbvErFKiZOy3k0J.Ad2hCK1KiQUk1ZgxFmw41y08C
-        System.out.println(encoder.encode(pwd));
+//        System.out.println(encoder.encode(pwd));
+
+        RestPackResponseCode.Base success = RestPackResponseCode.Base.SUCCESS;
+
+        success.setMessage("登录成功");
+
+        System.out.println(success);
+
     }
 }

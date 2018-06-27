@@ -4,6 +4,8 @@ import com.mace.common.Constant;
 import com.mace.common.ResponseMessage;
 import com.mace.domain.User;
 import com.mace.service.mysql.IUserService;
+import com.terran4j.commons.api2doc.annotations.Api2Doc;
+import com.terran4j.commons.api2doc.annotations.ApiComment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +19,9 @@ import javax.servlet.http.HttpSession;
  * Created by mace on 11:21 2018/5/3.
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user/")
+@Api2Doc(id = "user", name = "前台用户接口")
+@ApiComment(seeClass = User.class)
 public class UserController {
 
     @Autowired
@@ -33,7 +37,8 @@ public class UserController {
      * @param password
      * @return: com.bonc.common.ResponseMessage<com.bonc.domain.User>
      */
-    @RequestMapping(value = "login.do", method = RequestMethod.POST)
+    @ApiComment("门户登录")
+    @RequestMapping(name = "门户登录", value = "login.do", method = RequestMethod.POST)
     public ResponseMessage<User> login(HttpSession session, String username, String password){
 
         ResponseMessage<User> response = iUserService.login(username, password);

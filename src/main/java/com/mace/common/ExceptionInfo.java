@@ -9,21 +9,11 @@ import com.alibaba.fastjson.annotation.JSONField;
  */
 public class ExceptionInfo<T extends Exception> {
 
-    private String ip;
     private String url;
-    private String class_method;
     private String ex_message;
     @JSONField(serialize = false)
     private T exception;//Exception
     private String stackTrace;
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
 
     public String getUrl() {
         return url;
@@ -31,14 +21,6 @@ public class ExceptionInfo<T extends Exception> {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getClass_method() {
-        return class_method;
-    }
-
-    public void setClass_method(String class_method) {
-        this.class_method = class_method;
     }
 
     public String getEx_message() {

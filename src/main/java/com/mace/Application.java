@@ -1,7 +1,10 @@
 package com.mace;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.terran4j.commons.api2doc.config.EnableApi2Doc;
+import com.terran4j.commons.restpack.EnableRestPack;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
@@ -24,6 +27,8 @@ import java.util.List;
 @SpringBootApplication(exclude = {SolrAutoConfiguration.class})//不自动装配solr
 @EnableScheduling//启动定时任务
 @EnableKafka//启用对Kafka的支持
+@EnableApi2Doc//启用 Api2Doc 服务 http://你的项目地址/api2doc/home.html
+//@EnableRestPack//才能启用 RestPack
 public class Application {
 
     public static void main(String[] args) {
@@ -53,13 +58,14 @@ public class Application {
 
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
 
-        fastConverter.setFeatures(
+        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        fastJsonConfig.setSerializerFeatures(
+                //格式化
                 SerializerFeature.PrettyFormat,
                 //统一转换时间戳: yyyy-MM-dd HH:mm:ss
                 SerializerFeature.WriteDateUseDateFormat
-                //输出为null的
-                //SerializerFeature.WriteMapNullValue
         );
+        fastConverter.setFastJsonConfig(fastJsonConfig);
 
         List<MediaType> mediaTypes = new ArrayList<>();
         mediaTypes.add(MediaType.APPLICATION_JSON_UTF8);

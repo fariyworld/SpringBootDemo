@@ -1,6 +1,7 @@
 package com.mace;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -24,6 +25,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2//开启Swagger2
 public class Swagger2Config implements WebMvcConfigurer {
+
+    @Value("${swagger.enable}")
+    private boolean enableSwagger;
 
 //    @Override
 //    public void addCorsMappings(CorsRegistry registry) {
@@ -64,6 +68,7 @@ public class Swagger2Config implements WebMvcConfigurer {
     public Docket swaggerSpringMvcPlugin() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+                .enable(enableSwagger)
                 .tags(new Tag("user", "用户相关"),getTags())
                 .select()
                 /*.apis(RequestHandlerSelectors.basePackage("com.mace.controller"))*/

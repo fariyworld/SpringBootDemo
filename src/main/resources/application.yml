@@ -13,6 +13,11 @@ jasypt:
 md5:
   salt: aqeaqeaeqaeqraq
 
+#启用swagger false: fetching resource list: null; Please wait. 关闭
+#与restpack冲突
+swagger:
+  enable: true
+
 #FTP文件服务器设置
 ftp:
   host: 192.168.88.132

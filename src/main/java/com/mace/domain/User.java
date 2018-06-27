@@ -1,5 +1,7 @@
 package com.mace.domain;
 
+import com.terran4j.commons.api2doc.annotations.ApiComment;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,11 +14,13 @@ public class User implements Serializable {
     /**
      * 用户名
      */
+    @ApiComment(value = "用户名", sample = "mace")
     private String username;
 
     /**
      * 用户密码，MD5加密
      */
+    @ApiComment(value = "账号密码", sample = "sdfi23skvs")
     private String password;
 
     /**
