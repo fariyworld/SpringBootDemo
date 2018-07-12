@@ -309,4 +309,12 @@ org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acce
             <include>**/*.*</include>
         </includes>
     </resource>
+    
+
+5. Redis实现分布式锁的原理：
+*   1.通过setnx(lock_timeout)实现，如果设置了锁返回1， 已经有值没有设置成功返回0
+*   2.死锁问题：通过实践来判断是否过期，如果已经过期，获取到过期时间get(lockKey)，然后getset(lock_timeout)判断是否和get相同，
+*     相同则证明已经加锁成功，因为可能导致多线程同时执行getset(lock_timeout)方法，这可能导致多线程都只需getset后，对于判断加锁成功的线程，
+*     再加expire(lockKey, LOCK_TIMEOUT, TimeUnit.MILLISECONDS)过期时间，防止多个线程同时叠加时间，导致锁时效时间翻倍
+*   3.针对集群服务器时间不一致问题，可以调用redis的time()获取当前时间
 
