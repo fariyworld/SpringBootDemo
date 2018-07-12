@@ -83,8 +83,8 @@ public class FTPController {
 
 
     @RequestMapping(value = "downloadFile.do")
-    public ResponseMessage<String> downloadFile(String url, HttpServletResponse response){
+    public void downloadFile(String url, HttpServletResponse response){
 
-        return iftpService.downloadFile(url, response);
+        iftpService.downloadFile(url, response);
     }
 }

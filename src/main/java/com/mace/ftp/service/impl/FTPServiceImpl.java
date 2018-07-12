@@ -103,7 +103,7 @@ public class FTPServiceImpl implements IFTPService {
     }
 
     @Override
-    public ResponseMessage<String> downloadFile(String url, HttpServletResponse response) {
+    public void downloadFile(String url, HttpServletResponse response) {
         // 校验文件名是否有效
         if(CheckParamUtil.isEffective(url)){
 
@@ -127,7 +127,7 @@ public class FTPServiceImpl implements IFTPService {
                     os.write(buffer, 0, i);
                 }
                 log.info("下载成功：{}",url);
-                return ResponseMessage.createBySuccessMessage("下载成功："+ url);
+//                return ResponseMessage.createBySuccessMessage("下载成功："+ url);
 
             } catch (IOException e) {
                 log.error("IO异常, {}",e.getMessage());
@@ -155,7 +155,7 @@ public class FTPServiceImpl implements IFTPService {
                 }
             }
         }
-        return ResponseMessage.createByErrorResponseCode(ResponseCode.ILLEGAL_ARGUMENT);
+        log.error("非法参数 -- url ：{}",url);
     }
 
 

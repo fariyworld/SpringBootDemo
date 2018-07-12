@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -19,6 +18,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * description: Swagger配置类
+ *
+ * http://127.0.0.1:8088/v2/api-docs swagger.json
+ * 用于 https://github.com/Swagger2Markup/spring-swagger2markup-demo 生成离线文档（HTML/PDF）
+ * 1. 修改 pom.xml 配置 swagger.json 的输入路径
+ * <swagger.input>D:/JavaEE学习笔记/资源/Apidoc/swagger.json</swagger.input>
+ * 2. mvn clean test
+ * 3.cd spring-swagger2markup-demo\target\asciidoc\html index.html
  * <br />
  * Created by mace on 20:06 2018/6/23.
  */

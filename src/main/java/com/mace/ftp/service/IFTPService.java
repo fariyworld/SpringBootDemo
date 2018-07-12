@@ -36,7 +36,7 @@ public interface IFTPService {
     ResponseMessage<Map<String,String>> uploadFile(String dest, List<MultipartFile> fileList);
 
     /**
-     * description: 单文件下载
+     * description: 本地下载 ftp 服务器上的文件
      * <br /><br />
      * create by mace on 2018/6/7 12:11.
      * @param url       业务需要下载的 url
@@ -47,13 +47,13 @@ public interface IFTPService {
 
 
     /**
-     * description: 浏览器下载ftp服务器上的文件
+     * description: 浏览器 下载 ftp 服务器上的文件
      * <br /><br />
      * create by mace on 2018/6/7 15:52.
      * @param url   业务需要下载的 url
      * @param response
      * @return: com.mace.common.ResponseMessage<java.lang.String>
      */
-    ResponseMessage<String> downloadFile(String url, HttpServletResponse response);
+    void downloadFile(String url, HttpServletResponse response);
 
 }

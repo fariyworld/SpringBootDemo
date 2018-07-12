@@ -2,6 +2,7 @@ package com.mace.common;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.annotation.JSONType;
+import com.terran4j.commons.api2doc.annotations.ApiComment;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -66,6 +67,7 @@ public class ResponseMessage<T> implements Serializable {
     /**
      * 错误上下文相关属性
      */
+    @ApiComment(value = "错误上下文相关属性", sample = "key:属性，value:属性值")
     private HashMap<String, String> props;
 
     private ResponseMessage(int status){

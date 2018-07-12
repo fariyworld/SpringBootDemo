@@ -79,7 +79,7 @@ public String downloadFile(HttpServletRequest request, HttpServletResponse respo
     return null;
 }
 
-3.下载文件出现的异常
+3.下载文件出现的异常 (void) 并不影响业务
 
 2018-06-08 16:38:15.642  INFO 12252 --- [nio-8088-exec-3] com.mace.aop.WebLogAspect                : =========================请求 start======================================
 2018-06-08 16:38:15.642  INFO 12252 --- [nio-8088-exec-3] com.mace.aop.WebLogAspect                : IP : 127.0.0.1
@@ -289,3 +289,24 @@ org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acce
 	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_66]
 
 2018-06-08 16:38:16.014 ERROR 12252 --- [nio-8088-exec-3] w.s.e.ErrorMvcAutoConfiguration$SpelView : Cannot render error page for request [/ftp/downloadFile.do] and exception [Could not find acceptable representation] as the response has already been committed. As a result, the response may have the wrong status code.
+
+
+
+4. maven 引用本地jar
+
+    本地jar包放在 resources/lib下
+    <dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>aliyun-java-sdk-core</artifactId>
+        <version>3.3.1</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/src/main/resources/lib/aliyun-java-sdk-core-3.3.1.jar</systemPath>
+    </dependency>
+    编译打包时
+    <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+            <include>**/*.*</include>
+        </includes>
+    </resource>
+
